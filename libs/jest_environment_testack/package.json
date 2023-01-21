@@ -1,0 +1,36 @@
+{
+  "name": "jest-environment-testack",
+  "version": "0.2.2",
+  "description": "testack.js environment for Jest",
+  "main": "./dist",
+  "scripts": {
+    "build": "tsc",
+    "eslint": "eslint .",
+    "test": "jest"
+  },
+  "keywords": [
+    "testack.js",
+    "jest",
+    "jest-environment"
+  ],
+  "author": "Guy Eliyahu",
+  "license": "MIT",
+  "dependencies": {
+    "jest-environment-node": "^27.4.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "jest": "^29.3.1",
+    "testack": "file:../../testack"
+  },
+  "include": [
+    "src/**/*"
+  ],
+
+  "files": [
+    "src/**/*",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ]
+}
