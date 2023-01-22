@@ -8,9 +8,10 @@ import {MongoDB}  from "../../libs/mongodb";
 // const widgets : { [key: string]: any } = {"MongoDB":1}
 // var widgets = {""}
 // 
-const widgets = {"MongoDB": MongoDB}
+// const widgets = {"MongoDB": MongoDB}
+const widgets : { [key: string]: Function } = {"MongoDB": MongoDB}
 type Config = {
-    providers: object[];
+    providers: Object[];
     configPath?: string;
     
     // databases?: {
@@ -27,11 +28,18 @@ type Config = {
     // };
   };
 
+  type Providers = {
+    // mongodb: MongoDB;
+    [ key: string ]: MongoDB | any;
+
+  };
   
   
 export default class Testack {
 
-  providers: any;
+  providers: Providers = {};
+
+
 
 // databases: new Array();
 // function f({callback: {name = "cbFunction", params = "123"} = {}} = {}) {
@@ -66,41 +74,21 @@ export default class Testack {
         { 
             providers = [], 
             configPath = "~/.example.config.js"
-            
-            // url = 'Tom', username = "whatsoever" 
         }: Config //{ name?: string; age?: number }
 
     ){
-        this.providers = {};
-        console.log("Testack constructor")
+        
 
         providers.forEach( (provider:any) => {
-            // element.product_desc = element.product_desc.substring(0,10);
-            // var instance = Object.create(MongoDB.prototype);
-            // instance.constructor.apply(instance, args);    
-            // this.providers[provider["name"]] = instance;
-            console.log(widgets)
-
-            // var instance = Object.create(widgets[provider["name"]].prototype);
-            // console.log("args to create object Testack: ", provider)
-            // instance.constructor.apply(instance, provider);
-            // this.providers[provider["name"]] = instance;
+            var instance = Object.create(widgets[provider["name"]].prototype);
+            instance.constructor(provider);
+            this.providers[provider["name"].toLowerCase()] = instance
         });
         
+      }
     // ✅ Setting default values inside function body
     //   const { name = 'Tom', age } = obj; 
 
 
     
-    // username = "2";
-    // databases = ''
-
-    // if(databases["mongodb"])
-    //     this.databases["mongodb"] =  new MongoDB(url, username, password);        
   }
-
-//   reset(): Boolean {
-//     console.log('reset databases');
-//     return true;
-//   }
-}
