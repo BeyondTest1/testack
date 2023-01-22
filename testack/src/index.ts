@@ -77,12 +77,12 @@ export default class Testack {
         }: Config //{ name?: string; age?: number }
 
     ){
-        
-
         providers.forEach( (provider:any) => {
+          if (provider["name"] in widgets) {
             var instance = Object.create(widgets[provider["name"]].prototype);
             instance.constructor(provider);
             this.providers[provider["name"].toLowerCase()] = instance
+          }
         });
         
       }

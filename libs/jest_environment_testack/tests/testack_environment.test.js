@@ -16,7 +16,7 @@ describe('TestackEnvironment Unit Tests', function() {
   });
 
 
-  it('with changed settings', function() {
+  it('setting mongodb provider', function() {
     let mongodb_params = {
       name: "MongoDB",
       username:"username",
@@ -34,13 +34,6 @@ describe('TestackEnvironment Unit Tests', function() {
     );    
   });
 
-
-  // it('test with setup and auto_start off', async function() {
-  //   const instance = new TestackEnvironment({
-  //     testEnvironmentOptions: {
-  //       autoStartSession: false
-  //     }
-  //   });
 
   //   await instance.setup();
   //   assert.strictEqual(instance.global.browser, undefined);
