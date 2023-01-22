@@ -9,9 +9,9 @@ import {MongoDB}  from "../../libs/mongodb";
 // var widgets = {""}
 // 
 // const widgets = {"MongoDB": MongoDB}
-const widgets : { [key: string]: Function } = {"MongoDB": MongoDB}
+const widgets : { [key: string]: any } = {"MongoDB": MongoDB}
 type Config = {
-    providers: Object[];
+    providers: object[];
     configPath?: string;
     
     // databases?: {
@@ -79,7 +79,7 @@ export default class Testack {
     ){
         providers.forEach( (provider:any) => {
           if (provider["name"] in widgets) {
-            var instance = Object.create(widgets[provider["name"]].prototype);
+            const instance = Object.create(widgets[provider["name"]].prototype);
             instance.constructor(provider);
             this.providers[provider["name"].toLowerCase()] = instance
           }
