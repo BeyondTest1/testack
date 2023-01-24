@@ -1,5 +1,4 @@
 // const assert = require('assert');
-const NodeEnvironment = require('jest-environment-node');
 const TestackEnvironment = require('../dist/index.js').default;
 const Testack = require('../../../testack').default;
 // const Testack = require('testack');
@@ -18,7 +17,7 @@ describe('TestackEnvironment Unit Tests', function() {
 
   it('setting mongodb provider', function() {
     let mongodb_params = {
-      name: "MongoDB",
+      provider: "MongoDB",
       username:"username",
       password: "password"
     }
@@ -28,12 +27,43 @@ describe('TestackEnvironment Unit Tests', function() {
         providers: [ mongodb_params ]
       }
     });
+
     expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
     expect(instance.global.testack.providers.mongodb).toEqual(
-      expect.objectContaining({...mongodb_params, url:"url"})
-    );    
+      expect.objectContaining({
+        ...mongodb_params, 
+        host: "localhost",
+        provider: "MongoDB",
+        password: "password",
+        port: 27017,
+        provider: "MongoDB",
+        user: ""
+      })
+    );
   });
 
+
+  it('setting incorrect mongodb provider arguments', function() {
+    let mongodb_params = {
+      provider: "MongoDB",
+      param:"param not im MongoDB schema",
+
+    }
+    
+    const instance = new TestackEnvironment({
+      testEnvironmentOptions: {
+        providers: [ mongodb_params ]
+      }
+    });
+
+    expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
+    expect(instance.global.testack.providers.mongodb).toEqual(
+      expect.objectContaining({
+        ...mongodb_params, 
+        param:"param not im MongoDB schema",
+      })
+    );
+  });
 
   //   await instance.setup();
   //   assert.strictEqual(instance.global.browser, undefined);

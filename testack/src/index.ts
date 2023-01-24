@@ -74,21 +74,17 @@ export default class Testack {
         { 
             providers = [], 
             configPath = "~/.example.config.js"
-        }: Config //{ name?: string; age?: number }
+        }: Config
 
     ){
         providers.forEach( (provider:any) => {
-          if (provider["name"] in widgets) {
-            const instance = Object.create(widgets[provider["name"]].prototype);
+          if (provider["provider"] in widgets) {
+            const instance = Object.create(widgets[provider["provider"]].prototype);
             instance.constructor(provider);
-            this.providers[provider["name"].toLowerCase()] = instance
+            this.providers[provider["provider"].toLowerCase()] = instance
           }
         });
         
       }
-    // ✅ Setting default values inside function body
-    //   const { name = 'Tom', age } = obj; 
-
-
     
   }
