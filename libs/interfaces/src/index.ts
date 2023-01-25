@@ -1,5 +1,5 @@
 export interface IDatabase {
-  type: string;
+  provider: string;
   host: string;
   port: number;
   user: string;
@@ -8,12 +8,11 @@ export interface IDatabase {
 }
 
 export type TestEnvConfig = {
-  providers?: (IDatabase | IApi)[];
-
+  providers?: (IDatabase /*| IApi*/)[];
   actions?: {
-    BeforeEach?: any[];
-    AftereEach?: any[];
-    BeforeAll?: any[];
-    AfterAll?: any[];
-  }
-}
+      BeforeEach?: any[];
+      AftereEach?: any[];
+      BeforeAll?: any[];
+      AfterAll?: any[];
+  };
+};

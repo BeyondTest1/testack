@@ -43,24 +43,32 @@ describe('TestackEnvironment Unit Tests', function() {
   });
 
 
-  it('setting incorrect mongodb provider arguments', function() {
-    let mongodb_params = {
-      provider: "MongoDB",
-      param:"param not im MongoDB schema",
 
-    }
-    
+
+  it('should execute beforeEach reset method before each and every test', function() {
     const instance = new TestackEnvironment({
       testEnvironmentOptions: {
-        providers: [ mongodb_params ]
+        providers: [ {provider: "MongoDB"} ],
+        actions: {
+          BeforeEach: [{
+            provider: "MongoDB",
+            action: "reset"
+          }]
+        },
+        // async setup(Testack) {},
+        // async teardown(Testack) {},
+
       }
     });
 
     expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
+
     expect(instance.global.testack.providers.mongodb).toEqual(
       expect.objectContaining({
-        ...mongodb_params, 
-        param:"param not im MongoDB schema",
+        host: "localhost",
+        provider: "MongoDB",
+        port: 27017,
+        provider: "MongoDB",
       })
     );
   });

@@ -72,6 +72,17 @@ Update your [Jest configuration](https://jestjs.io/docs/configuration):
 | **`setup()`** | Function  | Additional setup hook to be executed after Testack has been started. | none |
 | **`teardown()`** | Function  | Additional teardown hook to be executed with the Testack api object. | none |
 
+
+
+you can also use the `jest-environment-testack` for only a specific suite case:
+```
+/**
+ * @jest-environment jest-environment-testack
+ */
+  it('use jest-environment-testack in this test file', function() {
+    expect(global.testack).toBeDefined();
+  });
+```
 ## API
 
 ### `global.browser`
@@ -102,3 +113,4 @@ MIT
 [license]: https://github.com/testackjs/jest-environment-testack/blob/main/LICENSE
 [discord-badge]: https://img.shields.io/discord/618399631038218240.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff&style=flat-square
 [discord]: https://discord.gg/SN8Da2X
+
