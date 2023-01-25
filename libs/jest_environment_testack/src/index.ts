@@ -8,13 +8,13 @@ import {TestEnvConfig} from '../../interfaces';
 // import Testack from '../../../testack';
 // export * from './mongodb/src/index';
 
-const Testack = require('../../../testack').default;
-// import Testack from '../../../testack';
+// const Testack = require('../../../testack').default;
+import Testack from '../../../testack';
 
 
 class TestackEnvironment extends NodeEnvironment {
 	public opts: TestEnvConfig;
-	public global: any;
+	public declare global: any;
   public actions: any;
   
 
