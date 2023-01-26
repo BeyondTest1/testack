@@ -66,7 +66,6 @@ describe('TestackEnvironment Unit Tests', function() {
     expect(instance.global.testack.providers.mongodb).toEqual(
       expect.objectContaining({
         host: "localhost",
-        provider: "MongoDB",
         port: 27017,
         provider: "MongoDB",
       })

@@ -9,19 +9,24 @@ import {TestEnvConfig} from '../../interfaces';
 // export * from './mongodb/src/index';
 
 // const Testack = require('../../../testack').default;
-import Testack from '../../../testack';
+import Testack from '../../../testack/';
 
 
 class TestackEnvironment extends NodeEnvironment {
 	public opts: TestEnvConfig;
 	public declare global: any;
-  public actions: any;
   
 
   constructor(config: any) {
     super(config);
 
     this.opts = config.testEnvironmentOptions || {};
+    this.opts.actions = this.opts.actions || {};
+    this.opts.actions.BeforeEach = this.opts.actions.BeforeEach || [];
+    this.opts.actions.BeforeAll = this.opts.actions.BeforeAll || [];
+    this.opts.actions.AfterEach = this.opts.actions.AfterEach || [];
+    this.opts.actions.BeforeAll = this.opts.actions.BeforeAll || [];
+    
 
     // this.client = createNightwatchClient(this.opts);
     // this.global.jestNightwatch = this.client;
@@ -31,11 +36,22 @@ class TestackEnvironment extends NodeEnvironment {
 
   async setup() {
     // this.opts.autoStartSession = this.opts.autoStartSession || typeof this.opts.autoStartSession == 'undefined';
-    for (const action of this.opts["actions"]?.BeforeEach || []) {
-      if(action?.action == "reset")
-        this.global.testack.providers[action.provider.toLowerCase()].reset();
-    }
-    
+    for (const action of this.opts.actions!.BeforeEach || []) {
+      
+      let provider_name = action.provider?.toLowerCase();
+      if (provider_name) {
+        switch(action?.action) { 
+          case "reset": { 
+              this.global.testack.providers[provider_name].reset();
+              break; 
+          } 
+          default: { 
+             console.warn(`action '${action?.action}' is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`)
+             break; 
+          } 
+       }                
+      }
+    }    
     // autoStartSession is true by default
     // if (this.opts.autoStartSession) {
     //   this.global.browser = await this.client.launchBrowser();

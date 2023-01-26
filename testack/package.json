@@ -7,7 +7,7 @@
     "start": "ts-node src/index.ts",
     "clean": "rimraf dist esm",
     "prebuild": "npm run clean",
-    "build": "tsc --build",
+    "build": "tsc --project . && tsc --build",
     "test": "jest",
     "lint": "eslint . --ext .ts"
   },
