@@ -21,12 +21,27 @@ class TestackEnvironment extends NodeEnvironment {
     super(config);
 
     this.opts = config.testEnvironmentOptions || {};
-    this.opts.actions = this.opts.actions || {};
-    this.opts.actions.BeforeEach = this.opts.actions.BeforeEach || [];
-    this.opts.actions.BeforeAll = this.opts.actions.BeforeAll || [];
-    this.opts.actions.AfterEach = this.opts.actions.AfterEach || [];
-    this.opts.actions.BeforeAll = this.opts.actions.BeforeAll || [];
-    
+    this.opts.events = this.opts.events || {};
+
+    this.opts.events.test_start = this.opts.events.test_start || [];
+    this.opts.events.test_done = this.opts.events.test_done || [];
+    this.opts.events.setup = this.opts.events.setup || [];
+    this.opts.events.teardown = this.opts.events.teardown || [];
+
+
+    // this.opts.events.add_hook = this.opts.events.add_hook || [];
+    // this.opts.events.start_describe_definition = this.opts.events.start_describe_definition || [];
+    // this.opts.events.add_test = this.opts.events.add_test || [];
+    // this.opts.events.finish_describe_definition = this.opts.events.finish_describe_definition || [];
+    // this.opts.events.run_start = this.opts.events.run_start || [];
+    // this.opts.events.run_describe_start = this.opts.events.run_describe_start || [];
+    // this.opts.events.hook_start = this.opts.events.hook_start || [];
+    // this.opts.events.hook_success = this.opts.events.hook_success || [];
+    // this.opts.events.test_fn_start = this.opts.events.test_fn_start || [];
+    // this.opts.events.test_fn_success = this.opts.events.test_fn_success || [];    
+    // this.opts.events.run_describe_finish = this.opts.events.run_describe_finish || [];
+    // this.opts.events.run_finish = this.opts.events.run_finish || [];
+        
 
     // this.client = createNightwatchClient(this.opts);
     // this.global.jestNightwatch = this.client;
@@ -34,63 +49,94 @@ class TestackEnvironment extends NodeEnvironment {
 
   }
 
-  async setup() {
-    // this.opts.autoStartSession = this.opts.autoStartSession || typeof this.opts.autoStartSession == 'undefined';
-    for (const action of this.opts.actions!.BeforeEach || []) {
+  // async doActions(hook: string){
+  //   for (const action of this.opts?.actions?.[hook] || []) {
+  //     if (action?.provider) {
+  //       switch(action?.action) { 
+  //         case "reset": { 
+  //             this.global.testack.providers[action?.provider].reset();
+  //             break; 
+  //         } 
+  //         default: { 
+  //            console.warn(`action '${action?.action}' in '${hook}' hook is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`)
+  //            break; 
+  //         } 
+  //      }                
+  //     }
+  //   }
+  // }
+
+  // async setup() {
+  //   await this.doActions("beforeAll")
+  //   // this.opts.autoStartSession = this.opts.autoStartSession || typeof this.opts.autoStartSession == 'undefined';
+
+  //   // if (typeof this.opts.setup == 'function') {
+  //   //   await this.opts.setup.call(this.global, this.global.Testack);
+  //   // }
+  //   await super.setup();
+  // }
+
+  // async teardown() {
+  //   await this.doActions("afterAll") 
+  //   await super.teardown();
+
+  //   // if (typeof this.opts.teardown == 'function') {
+  //   //   await this.opts.teardown.call(this.global, this.global.Testack);
+  //   // }
+  // }
+
+  async handleTestEvent(event:any, state:any) {    
+  //   if (event?.name){
+  //     const name = event?.name;
+  //     for (const action of this.opts!.events?.[name] || []) {
+  //       let providerName = action?.provider?.toLowerCase();
+  //       let actionName = action?.action;
+        
+  //       if (providerName) {
+          
+  //         switch(actionName) { 
+  //           case "reset": {
+  //               this.global.testack.providers[providerName]?.reset();
+  //               break; 
+  //           } 
+  //           default: { 
+  //             console.warn(`action '${actionName}' in '${event.name}' event is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`)
+  //             break; 
+  //           } 
+  //       }                
+  //     }
+  //   }
+  // }
+  
+
+  this.opts?.events?.[event?.name]?.forEach( (action:any) => {
+    // for (const action of this.opts?.events?.[event?.name] || []) {
+      let providerName = action?.provider?.toLowerCase();
+      let actionName = action?.action;
       
-      let provider_name = action.provider?.toLowerCase();
-      if (provider_name) {
-        switch(action?.action) { 
-          case "reset": { 
-              this.global.testack.providers[provider_name].reset();
+      if (providerName) {
+        
+        switch(actionName) { 
+          case "reset": {
+              this.global?.testack?.providers[providerName]?.reset();
               break; 
           } 
           default: { 
-             console.warn(`action '${action?.action}' is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`)
-             break; 
+            console.warn(`action '${actionName}' in '${event.name}' event is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`)
+            break; 
           } 
-       }                
+        }                
       }
-    }    
-    // autoStartSession is true by default
-    // if (this.opts.autoStartSession) {
-    //   this.global.browser = await this.client.launchBrowser();
-    // }
-    // if (this.opts.baseUrl) {
-    //   this.global.browser.baseUrl = this.opts.baseUrl;
-    // }
-    // if (typeof this.opts.setup == 'function') {
-    //   await this.opts.setup.call(this.global, this.global.Testack);
-    // }
-    await super.setup();
-  }
+    })
+  
 
-  async teardown() {
-    
-    await super.teardown();
-
-    // if (typeof this.opts.teardown == 'function') {
-    //   await this.opts.teardown.call(this.global, this.global.Testack);
-    // }
-  }
-
-
-  async handleTestEvent(event:any, state:any) {
-    if (event.name === "test_done") {
-      // console.log(event.name);
-      
-    }
-             
+    // console.info(event.name);
     // if (event.name === "test_start") {
-    //     let testNames = [];
-    //     let currentTest = event.test;
-    //     while (currentTest) {
-    //       testNames.push(currentTest.name);
-    //       currentTest = currentTest.parent;
-    //     }
-
-    //     this.global.describeName = testNames[1]  
-    //     this.global.testName = testNames[0]  
+    //   await this.doActions("beforeEach") 
+    // }
+    // else if (event.name === "test_done") {
+    //   await this.doActions("afterEach") 
+    //   // console.log(event.name);
     // }
 
     // if (event.name === "test_fn_failure") {
@@ -99,7 +145,7 @@ class TestackEnvironment extends NodeEnvironment {
     //     this.global.testStatus = "success"
     // }
   // }
-}
+  }
 
 }
 

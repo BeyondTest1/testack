@@ -1,13 +1,13 @@
 // const assert = require('assert');
 const TestackEnvironment = require('../dist/index.js').default;
-const Testack = require('../../../testack').default;
+// const Testack = require('../../../testack').default;
 // const Testack = require('testack');
 // const { Testack }  = require('../../../testack');
 // const * as Testack = require('../dist/index.js').default;
 
 // const TestackClient = require('testack/lib/core/client.js');
 
-describe('TestackEnvironment Unit Tests', function() {
+describe('TestackEnvironment events', function() {
 
     let testackEnv;
 
@@ -24,47 +24,36 @@ describe('TestackEnvironment Unit Tests', function() {
         global.console.warn = jest.fn();
         global.console.log = jest.fn();
     });
-    
-    test("reset should be called", async () => {
-      testackEnv.opts.actions = {
-        BeforeEach: [{
+    test("should  call 'reset' when action is configured in events", async () => {
+      testackEnv.opts.events = {
+        "setup": [{
           provider: "MongoDB",
           action: "reset"
         }]
       };
 
-      await testackEnv.setup();
+      await testackEnv.handleTestEvent({name: "setup"});
       expect(testackEnv.global.testack.providers.mongodb.reset).toHaveBeenCalledTimes(1);
     });
 
-    test("should not call 'reset' when BeforeEach is empty", async () => {
-      testackEnv.opts.actions.BeforeEach = [];
-      await testackEnv.setup();
+    test(`should not call 'reset' when event is not configured`, async () => {
+      testackEnv.opts.events["setup"] = [];
+      // await testackEnv[jestFunc](args);
+      await testackEnv.handleTestEvent({name: "setup"});
       expect(testackEnv.global.testack.providers.mongodb.reset).toHaveBeenCalledTimes(0);
     });
 
-    test("should not call reset AND message a warnning when action is incorrect", async () => {
-      testackEnv.opts.actions = {
-        BeforeEach: [{
+    test("should not call 'reset' when action is configured with incorrect action", async () => {
+      testackEnv.opts.events = {
+        "setup": [{
           provider: "MongoDB",
           action: "incorrect action"
         }]
       };
       
-      await testackEnv.setup();
+      await testackEnv.handleTestEvent({name: "setup"});
       expect(testackEnv.global.testack.providers.mongodb.reset).toHaveBeenCalledTimes(0);
       expect(console.warn).toBeCalledTimes(1)
-      expect(console.warn).toHaveBeenLastCalledWith("action 'incorrect action' is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!")
-  
+      expect(console.warn).toHaveBeenLastCalledWith(`action 'incorrect action' in 'setup' event is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`)  
     });
-
-
-    
-//   it('create and verify the instance', function() {
-//     const instance = new TestackEnvironment({});
-//     expect(instance).toBeInstanceOf(TestackEnvironment);
-//     expect(instance.global.testack).toBeInstanceOf(Testack);
-//   });
-
-
 });
