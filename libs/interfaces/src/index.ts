@@ -9,9 +9,11 @@ export interface IDatabase {
 
 export type TestEnvConfig = {
   providers?: (IDatabase /*| IApi*/)[];
-  events?: {
+  actions?: {provider: string, method: string, event: string}[];
+
+  // {
     // [eventName:string]: any[] ;
-    [eventName:string]: {provider: string, action: string}[] ;
+    // [eventName:string]: {provider: string, action: string}[] ;
     
     // [eventName in 'test_start'| 'test_done'| 'setup'| 'teardown']?: {provider: string, action: string}[];
   
@@ -31,5 +33,5 @@ export type TestEnvConfig = {
     // [run_describe_finish:string]: any[];
     // [run_finish:string]: any[];
     // [teardown:string]: any[];
-  };
+  // };
 };

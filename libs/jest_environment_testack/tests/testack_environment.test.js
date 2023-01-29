@@ -49,17 +49,14 @@ describe('TestackEnvironment Unit Tests', function() {
     const instance = new TestackEnvironment({
       testEnvironmentOptions: {
         providers: [ {provider: "MongoDB"} ],
-        actions: {
-          BeforeEach: [{
-            provider: "MongoDB",
-            action: "reset"
-          }]
-        },
-        // async setup(Testack) {},
-        // async teardown(Testack) {},
-
-      }
+        actions: [{
+          event: "test_start",
+          provider: "MongoDB",
+          method: "reset"
+        }]
+      },
     });
+
 
     expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
 
