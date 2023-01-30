@@ -78,23 +78,20 @@ class TestackEnvironment extends NodeEnvironment {
 
   async handleTestEvent(event:any, state:any) {    
   if( !event?.name) return;
-
-  
-
-  this.actions[event.name]?.map((action:any) => {
-  switch(action.method) { 
-    case "reset": {      
-        this.global?.testack?.providers[action.provider.toLowerCase()]?.reset();
-        break; 
-    } 
-    default: { 
-      console.warn(
-      `action with method '${action.method}' not found in  '${action.provider}' class. please verify your 'testEnvironmentOptions' configuration section!`
-      );
-      break; 
-    } 
-  }
-})
+    this.actions[event.name]?.map((action:any) => {
+      switch(action.method) { 
+        case "reset": {      
+            this.global?.testack?.providers[action.provider.toLowerCase()]?.reset();
+            break; 
+        } 
+        default: { 
+          console.warn(
+          `action with method '${action.method}' not found in  '${action.provider}' class. please verify your 'testEnvironmentOptions' configuration section!`
+          );
+          break; 
+        } 
+      }
+    })
   }
 }
 
