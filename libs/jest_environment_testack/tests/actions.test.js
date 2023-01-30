@@ -57,7 +57,7 @@ describe('TestackEnvironment actions', function() {
           actions: [{
             event: "setup",
             provider: "MongoDB",
-            method: "incorrect action"
+            method: "incorrect_method"
           }]
         }
       });
@@ -70,6 +70,6 @@ describe('TestackEnvironment actions', function() {
       await testackEnv.handleTestEvent({name: "setup"});
       expect(resetFunction).toHaveBeenCalledTimes(0);
       expect(console.warn).toBeCalledTimes(1)
-      expect(console.warn).toHaveBeenLastCalledWith(`action 'incorrect action' in 'setup' event is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`);
+      expect(console.warn).toHaveBeenLastCalledWith(`action with method 'incorrect_method' not found in  'MongoDB' class. please verify your 'testEnvironmentOptions' configuration section!`);
     });
 });

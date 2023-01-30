@@ -88,7 +88,9 @@ class TestackEnvironment extends NodeEnvironment {
         break; 
     } 
     default: { 
-      console.warn(`action '${action.method}' in '${event.name}' event is not recognized. please verify your 'actions' section in 'testEnvironmentOptions' section!`)
+      console.warn(
+      `action with method '${action.method}' not found in  '${action.provider}' class. please verify your 'testEnvironmentOptions' configuration section!`
+      );
       break; 
     } 
   }
