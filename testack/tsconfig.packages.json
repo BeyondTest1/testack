@@ -1,0 +1,14 @@
+{
+  "references": [
+      {
+        "path": "../libs/mongodb", "dependOn": "../testack"
+      },
+      {
+        "path": "../libs/interfaces", "dependOn": "../testack"
+      },
+      {
+        "path": "../libs/jest_environment_testack", "dependOn": "../testack"
+      }
+
+  ]
+}
