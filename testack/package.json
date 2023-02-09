@@ -9,7 +9,9 @@
     "prebuild": "npm run clean",
     "build": "tsc --project . && tsc --build",
     "test": "jest",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "watch": "tsc -b ./tsconfig.packages.json ./tsconfig.json --watch"
+
   },
   "author": "",
   "license": "ISC",
