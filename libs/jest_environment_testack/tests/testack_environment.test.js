@@ -2,7 +2,6 @@
 const TestackEnvironment = require('../dist/index.js').default;
 const Testack = require('../../../testack').default;
 // const Testack = require('testack');
-// const { Testack }  = require('../../../testack');
 // const * as Testack = require('../dist/index.js').default;
 
 // const TestackClient = require('testack/lib/core/client.js');

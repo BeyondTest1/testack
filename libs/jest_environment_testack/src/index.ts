@@ -11,7 +11,6 @@ import {TestEnvConfig} from '../../interfaces';
 // const Testack = require('../../../testack').default;
 import Testack from '../../../testack/';
 
-
 class TestackEnvironment extends NodeEnvironment {
 	public opts: TestEnvConfig;
 	public declare global: any;
@@ -49,9 +48,6 @@ class TestackEnvironment extends NodeEnvironment {
     // this.opts.events.run_describe_finish = this.opts.events.run_describe_finish || [];
     // this.opts.events.run_finish = this.opts.events.run_finish || [];
         
-
-    // this.client = createNightwatchClient(this.opts);
-    // this.global.jestNightwatch = this.client;
     this.global.testack = new Testack(<any>this.opts);
   }
 
