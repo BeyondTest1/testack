@@ -1,14 +1,14 @@
 import { IDatabase } from '../../interfaces';
 
-export class MongoDB implements IDatabase {
-  url: string;
-  username: string;
-  password: string;
+export class MongoDB implements IDatabase  {
+  provider = "MongoDB";
+  host = "localhost";
+  port = 27017;
+  user = "";
+  password = "";
 
-  constructor(name: string, username: string, password: string) {
-    this.url = name;
-    this.username = username;
-    this.password = password;
+  constructor(config: IDatabase, options:any) {
+    Object.assign(this, config, options);
   }
 
   reset(): Boolean {

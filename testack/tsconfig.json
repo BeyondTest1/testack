@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",                                /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
-    // "moduleResolution": "node",
+    //"moduleResolution": "node",
     "declaration": true,
 
     "module": "commonjs",                           /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
@@ -16,13 +16,13 @@
   },
   "references": [
       {
-        "path": "../libs/mongodb"
+        "path": "../libs/mongodb", "dependOn": "../testack"
       },
       {
-        "path": "../libs/interfaces"
+        "path": "../libs/interfaces", "dependOn": "../testack"
       },
       {
-        "path": "../libs/jest_environment_testack"
+        "path": "../libs/jest_environment_testack", "dependOn": "../testack"
       }
 
   ]
