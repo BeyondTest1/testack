@@ -8,25 +8,35 @@ const Testack = require('../').default;
 describe('TestackEnvironment Unit Tests', function() {
   it('setting mongodb provider', function() {
     let mongodb_params = {
-      name: "MongoDB",
+      provider: "MongoDB",
       username:"username",
       password: "password"
     }
-    
+
     const testack = new Testack({
         providers: [ mongodb_params ]
       }
     );
     expect(Object.keys(testack.providers)).toHaveLength(1);
     expect(testack.providers.mongodb).toEqual(
-      expect.objectContaining({...mongodb_params, url:"url"})
+      expect.objectContaining(
+        {
+          ...mongodb_params, 
+          host: "localhost",
+          provider: "MongoDB",
+          password: "password",
+          port: 27017,
+          provider: "MongoDB",
+          user: ""
+        }
+      )
     );
   });
 
   it('should filter incorrect provider setting', async function() {
     const testack = new Testack({
         providers: [ {
-                name: "IncorrectProvider",
+                provider: "IncorrectProvider",
             } 
         ]
     });
