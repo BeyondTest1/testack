@@ -5,6 +5,7 @@ export interface IDatabase {
   user: string;
   password: string;
   reset: () => void;
+  seed: () => void;
 }
 
 export type TestEnvConfig = {
