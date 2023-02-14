@@ -1,4 +1,4 @@
-import { IDatabase } from '../../interfaces';
+import { IDatabase } from 'testack-interfaces';
 const Fixtures = require('node-mongodb-fixtures');
 
 export class MongoDB implements IDatabase  {

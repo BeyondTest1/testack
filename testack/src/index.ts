@@ -1,4 +1,4 @@
-import {MongoDB}  from "../../libs/mongodb";
+import {MongoDB}  from "testack-mongodb";
 // const { MongoDB }  = require('../../libs/mongodb');
 // import * as widgets from '../libs/';
 // import * as widgets from '..';
@@ -9,82 +9,29 @@ import {MongoDB}  from "../../libs/mongodb";
 // var widgets = {""}
 // 
 // const widgets = {"MongoDB": MongoDB}
+
 const widgets : { [key: string]: any } = {"MongoDB": MongoDB}
 type Config = {
-    providers: object[];
-    configPath?: string;
-    
-    // databases?: {
-    //     mongodb?: {
-    //         url?: string;
-    //         username?: string;
-    //         password?: string;                  
-    //     }
-    //     postegresql?: {
-    //         url?: string;
-    //         username?: string;
-    //         password?: string;                  
-    //     }
-    // };
-  };
+  providers: object[];
+  configPath?: string;
+};
 
-  type Providers = {
-    // mongodb: MongoDB;
-    [ key: string ]: MongoDB | any;
+type Providers = {
+  [ key: string ]: MongoDB | any;
+};
 
-  };
-  
-  
 export default class Testack {
-
   providers: Providers = {};
-
-
-
-// databases: new Array();
-// function f({callback: {name = "cbFunction", params = "123"} = {}} = {}) {
-
-//   constructor({
-//     databases = [],
-//     username = undefined,
-//     password = undefined,
-//     config = './testack.json'
-//   }={})
-
-// const laptops = [
-//     {
-//       year: 2018,
-//       os: 'OSX',
-//       sellerZipCodes: ['10010', '07302'],
-//     },
-//     {
-//       year: 2015,
-//       os: 'Ubuntu',
-//       sellerZipCodes: ['07030'],
-//     },
-//   ];
-//   const [
-//     {
-//       sellerZipCodes: [, secondZipCode],
-//     },
-//   ] = laptops;
-  
-//   console.log(secondZipCode); // '07302'
-    constructor(
-        { 
-            providers = [], 
-            configPath = "~/.example.config.js"
-        }: Config
-
-    ){
+  constructor({ 
+          providers = [], 
+          configPath = "~/.example.config.js"
+      }: Config) {
         providers.forEach( (provider:any) => {
           if (provider["provider"] in widgets) {
             const instance = Object.create(widgets[provider["provider"]].prototype);
             instance.constructor(provider);
             this.providers[provider["provider"].toLowerCase()] = instance
           }
-        });
-        
-      }
-    
+        });      
+    }
   }
