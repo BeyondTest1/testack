@@ -1,4 +1,4 @@
-const TestackEnvironment = require('../dist/index.js').default;
+const TestackEnvironment = require('../dist/index.js');
 // const Testack = require('../../../testack').default;
 // const Testack = require('testack');
 // const { Testack }  = require('../../../testack');

@@ -1,30 +1,26 @@
-// import  { Testack } from '../../../src/index';
 import NodeEnvironment from 'jest-environment-node';
-import {TestEnvConfig} from '../../interfaces';
-// const Testack = require('testack');
-// import  Testack from 'testack'
+import {TestEnvConfig} from 'testack-interfaces';
+import Testack from 'testackjs';
 
-// import {Testack} from "testack";
-// import Testack from '../../../testack';
 // export * from './mongodb/src/index';
-
 // const Testack = require('../../../testack').default;
-import Testack from '../../../testack/';
+// export default class TestackEnvironment implements NodeEnvironment {
 
 class TestackEnvironment extends NodeEnvironment {
 	public opts: TestEnvConfig;
 	public declare global: any;
   private actions: any = {};
   
+  // constructor(config: Config.ProjectConfig, options: EnvironmentContext = {}) {
 
-  constructor(config: any) {
-    super(config);
+  constructor(config: any={}, options: any={}) {
+    super(config,options);
 
-    this.opts = config.testEnvironmentOptions || {};
+    this.opts = config?.testEnvironmentOptions || {};
     this.opts.actions = this.opts.actions || [];
 
     // group actions by action event
-    this.opts?.actions?.map(action => {
+    this.opts?.actions?.map((action:any) => {
       if (!this.actions[action.event]) {
         this.actions[action.event] = [];
       }
@@ -91,5 +87,7 @@ class TestackEnvironment extends NodeEnvironment {
   }
 }
 
+module.exports = TestackEnvironment;
 
-export default TestackEnvironment;
+// export = TestackEnvironment;
+// export default TestackEnvironment;

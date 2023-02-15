@@ -1,5 +1,5 @@
 // const assert = require('assert');
-const TestackEnvironment = require('../dist/index.js').default;
+const TestackEnvironment = require('../dist/index.js');
 const Testack = require('../../../testack').default;
 // const Testack = require('testack');
 // const * as Testack = require('../dist/index.js').default;
