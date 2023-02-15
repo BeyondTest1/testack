@@ -13,8 +13,8 @@ class TestackEnvironment extends NodeEnvironment {
   
   // constructor(config: Config.ProjectConfig, options: EnvironmentContext = {}) {
 
-  constructor(config: any={}) {
-    super(config);
+  constructor(config: any={}, options: any={}) {
+    super(config,options);
 
     this.opts = config?.testEnvironmentOptions || {};
     this.opts.actions = this.opts.actions || [];
