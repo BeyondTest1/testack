@@ -1,16 +1,13 @@
-// const assert = require('assert');
-const TestackEnvironment = require('../dist/index.js');
+const TestackEnvironment = require('../index.js');
 const Testack = require('../../../testack').default;
-// const Testack = require('testack');
-// const * as Testack = require('../dist/index.js').default;
-
-// const TestackClient = require('testack/lib/core/client.js');
 
 describe('TestackEnvironment Unit Tests', function() {
   it('create and verify the instance', function() {
-    const instance = new TestackEnvironment({});
+    const instance = new TestackEnvironment();
     expect(instance).toBeInstanceOf(TestackEnvironment);
-    expect(instance.global.testack).toBeInstanceOf(Testack);
+    expect(Testack).toBeInstanceOf(Function);
+    expect(instance.global.testack).toBeInstanceOf(Object);
+    expect(instance.global.testack.constructor).toBeInstanceOf(Function);
   });
 
 
