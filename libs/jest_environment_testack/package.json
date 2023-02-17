@@ -1,13 +1,23 @@
 {
   "name": "jest-environment-testack",
-  "version": "0.0.10",
+  "version": "0.0.13",
   "description": "testack.js environment for Jest",
-  "main": "index.js",
+  "type": "commonjs",
+  "main": "./index.js",
   "scripts": {
+    "prebuild": "rm -rf dist",
     "lint": "eslint . --ext .js",
     "test": "jest",
     "build": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BeyondTest1/testack.git",
+    "directory": "libs/jest-environment-testack"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },  
   "keywords": [
     "testack.js",
     "jest",
@@ -16,11 +26,11 @@
   "author": "Guy Eliyahu",
   "license": "MIT",
   "dependencies": {
-    "jest-environment-node": "^27.4.6"  
+    "jest-environment-node": "^29.4.0"
   },
   "devDependencies": {
     "eslint": "^8.32.0",
-    "jest": "^29.3.1",
+    "jest": "29.4.3",
     "testack-mongodb": "file:../mongodb",
     "testackjs": "file:../../testack",
     "testack-interfaces": "file:../interfaces"
