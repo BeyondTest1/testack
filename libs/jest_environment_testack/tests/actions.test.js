@@ -11,14 +11,16 @@ describe('TestackEnvironment actions', function() {
     });
     test("should  call 'reset' when action is configured in actions", async () => {
       testackEnv = new TestackEnvironment({
-        testEnvironmentOptions: {
-          providers: [ {provider: "MongoDB"} ],
-          actions: [{
-            event: "setup",
-            provider: "MongoDB",
-            method: "reset"
-          }]
-        },
+        projectConfig: {
+          testEnvironmentOptions: {
+            providers: [ {provider: "MongoDB"} ],
+            actions: [{
+              event: "setup",
+              provider: "MongoDB",
+              method: "reset"
+            }]
+          },
+        }
       });
       const resetFunction = jest.spyOn(testackEnv.global.testack.providers.mongodb, 'reset')
         .mockImplementation(() => Promise.resolve());;
@@ -29,10 +31,12 @@ describe('TestackEnvironment actions', function() {
 
     test(`should not call 'reset' when event is not configured`, async () => {
       testackEnv = new TestackEnvironment({
-        testEnvironmentOptions: {
-          providers: [ {provider: "MongoDB"} ],
-          actions: []
-        },
+        projectConfig: {
+          testEnvironmentOptions: {
+            providers: [ {provider: "MongoDB"} ],
+            actions: []
+          },
+        }
       });
       
       resetFunction = jest.spyOn(testackEnv.global.testack.providers.mongodb, 'reset');
@@ -43,13 +47,15 @@ describe('TestackEnvironment actions', function() {
 
     test("should not call 'reset' when action is configured with incorrect action", async () => {
       testackEnv = new TestackEnvironment({
-        testEnvironmentOptions: {
-          providers: [ {provider: "MongoDB"} ],
-          actions: [{
-            event: "setup",
-            provider: "MongoDB",
-            method: "incorrect_method"
-          }]
+        projectConfig: {
+          testEnvironmentOptions: {
+            providers: [ {provider: "MongoDB"} ],
+            actions: [{
+              event: "setup",
+              provider: "MongoDB",
+              method: "incorrect_method"
+            }]
+          }
         }
       });
       resetFunction = jest.spyOn(testackEnv.global.testack.providers.mongodb, 'reset');
