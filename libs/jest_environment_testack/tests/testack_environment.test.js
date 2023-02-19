@@ -1,16 +1,13 @@
-// const assert = require('assert');
-const TestackEnvironment = require('../dist/index.js');
+const TestackEnvironment = require('../index.js');
 const Testack = require('../../../testack').default;
-// const Testack = require('testack');
-// const * as Testack = require('../dist/index.js').default;
-
-// const TestackClient = require('testack/lib/core/client.js');
 
 describe('TestackEnvironment Unit Tests', function() {
   it('create and verify the instance', function() {
-    const instance = new TestackEnvironment({});
+    const instance = new TestackEnvironment({projectConfig:{testEnvironmentOptions:{}}});
     expect(instance).toBeInstanceOf(TestackEnvironment);
-    expect(instance.global.testack).toBeInstanceOf(Testack);
+    expect(Testack).toBeInstanceOf(Function);
+    expect(instance.global.testack).toBeInstanceOf(Object);
+    expect(instance.global.testack.constructor).toBeInstanceOf(Function);
   });
 
 
@@ -22,9 +19,13 @@ describe('TestackEnvironment Unit Tests', function() {
     }
     
     const instance = new TestackEnvironment({
-      testEnvironmentOptions: {
-        providers: [ mongodb_params ]
-      }
+      projectConfig:{
+        testEnvironmentOptions: {
+          providers: [ mongodb_params ]
+        }
+  
+      },
+
     });
 
     expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
@@ -46,14 +47,16 @@ describe('TestackEnvironment Unit Tests', function() {
 
   it('should execute beforeEach reset method before each and every test', function() {
     const instance = new TestackEnvironment({
-      testEnvironmentOptions: {
-        providers: [ {provider: "MongoDB"} ],
-        actions: [{
-          event: "test_start",
-          provider: "MongoDB",
-          method: "reset"
-        }]
-      },
+      projectConfig:{
+        testEnvironmentOptions: {
+          providers: [ {provider: "MongoDB"} ],
+          actions: [{
+            event: "test_start",
+            provider: "MongoDB",
+            method: "reset"
+          }]
+        },
+      }
     });
 
 
