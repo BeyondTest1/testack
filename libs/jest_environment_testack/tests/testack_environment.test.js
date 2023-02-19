@@ -3,7 +3,7 @@ const Testack = require('../../../testack').default;
 
 describe('TestackEnvironment Unit Tests', function() {
   it('create and verify the instance', function() {
-    const instance = new TestackEnvironment();
+    const instance = new TestackEnvironment({projectConfig:{testEnvironmentOptions:{}}});
     expect(instance).toBeInstanceOf(TestackEnvironment);
     expect(Testack).toBeInstanceOf(Function);
     expect(instance.global.testack).toBeInstanceOf(Object);
@@ -19,9 +19,13 @@ describe('TestackEnvironment Unit Tests', function() {
     }
     
     const instance = new TestackEnvironment({
-      testEnvironmentOptions: {
-        providers: [ mongodb_params ]
-      }
+      projectConfig:{
+        testEnvironmentOptions: {
+          providers: [ mongodb_params ]
+        }
+  
+      },
+
     });
 
     expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
@@ -43,14 +47,16 @@ describe('TestackEnvironment Unit Tests', function() {
 
   it('should execute beforeEach reset method before each and every test', function() {
     const instance = new TestackEnvironment({
-      testEnvironmentOptions: {
-        providers: [ {provider: "MongoDB"} ],
-        actions: [{
-          event: "test_start",
-          provider: "MongoDB",
-          method: "reset"
-        }]
-      },
+      projectConfig:{
+        testEnvironmentOptions: {
+          providers: [ {provider: "MongoDB"} ],
+          actions: [{
+            event: "test_start",
+            provider: "MongoDB",
+            method: "reset"
+          }]
+        },
+      }
     });
 
 
