@@ -5,6 +5,9 @@
       },
       {
         "path": "../libs/interfaces", "dependOn": "../testack"
+      },
+      {
+        "path": "../libs/create_testack"
       }
   ]
 }
