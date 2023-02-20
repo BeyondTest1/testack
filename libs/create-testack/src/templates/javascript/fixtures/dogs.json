@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Lassie",
+        "breed": "the Rough Collie",
+        "age": 6
+     },
+    {
+        "name": "Toto",
+        "breed": "the Cairn Terrier",
+        "age": 6
+     },
+     {
+        "name": "Snoop Doggy Dogg",
+        "breed": "the Singer",
+        "age": 6
+     }
+ 
+   ]
+ 
