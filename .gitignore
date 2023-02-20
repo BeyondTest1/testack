@@ -28,7 +28,7 @@ coverage
 
 # Bower dependency directory (https://bower.io/)
 bower_components
-
+testack/src/index.js
 # node-waf configuration
 .lock-wscript
 
