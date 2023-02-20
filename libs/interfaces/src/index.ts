@@ -4,6 +4,7 @@ export interface IDatabase {
   port: number;
   user: string;
   password: string;
+  inMemory: boolean;
   reset: () => void;
   seed: () => void;
 }
