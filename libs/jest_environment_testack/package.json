@@ -7,7 +7,6 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "lint": "eslint . --ext .js",
-    "test": "jest",
     "build": "tsc"
   },
   "repository": {
@@ -30,7 +29,6 @@
   },
   "devDependencies": {
     "eslint": "^8.32.0",
-    "jest": "29.4.3",
     "testack-mongodb": "file:../mongodb",
     "testackjs": "file:../../testack",
     "testack-interfaces": "file:../interfaces"

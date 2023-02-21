@@ -1,0 +1,26 @@
+{
+  "name": "testack",
+  "version": "1.0.0",
+  "main": "jest.config.base.js",
+  "scripts": {
+    "test:mongodb": "jest --runInBand --detectOpenHandles --selectProjects=mongodb",
+    "test:jestenv": "jest --runInBand --detectOpenHandles --selectProjects=jest-environment",
+    "test:init": "jest --runInBand --detectOpenHandles --selectProjects=create-testack",
+    "test:testack": "jest --runInBand --detectOpenHandles --selectProjects=testack",
+    "test": "jest --runInBand --detectOpenHandles --projects"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BeyondTest1/testack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BeyondTest1/testack/issues"
+  },
+  "homepage": "https://github.com/BeyondTest1/testack#readme",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  }
+}

@@ -1,5 +1,8 @@
+// const sharedConfig = require('../../jest.config.js');
+
 module.exports = async () => {
   return {
+    // ...sharedConfig,
     verbose: true,
     // testEnvironment: 'jest-environment-testack',
     // testEnvironmentOptions: {

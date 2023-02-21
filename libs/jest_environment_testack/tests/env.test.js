@@ -1,5 +1,5 @@
 /**
-* @jest-environment ./
+* @jest-environment ./index.js
 */
 
 describe('TestackEnvironment Unit Tests', function() {
