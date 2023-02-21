@@ -6,7 +6,7 @@ mongoose.set('strictQuery', false);
 mongodb_params = undefined
 Dog = mongoose.model('Dog', new mongoose.Schema({ name: String, breed: String, age:Number }));
 
-describe('TestackEnvironment Unit Tests', function() {
+describe('MongoDB Unit Tests', function() {
   beforeAll(async () => {
 
     mongodb_params = {
@@ -42,8 +42,9 @@ describe('TestackEnvironment Unit Tests', function() {
     await expect(Dog.count()).resolves.toBe(1);
     await instance.reset();
     await expect(Dog.count()).resolves.toBe(0);
-    await instance.destroy();
     await mongoose.connection.close()
+    await instance.destroy();
+    
 
   });
 
@@ -53,7 +54,9 @@ describe('TestackEnvironment Unit Tests', function() {
     
     await instance.seed();
     await expect(Dog.count()).resolves.toBe(3);
-    await instance.destroy();
+    
     await mongoose.connection.close()
+    await instance.destroy();
+    
   });
 });

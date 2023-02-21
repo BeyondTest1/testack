@@ -1,4 +1,5 @@
 import { IDatabase } from 'testack-interfaces';
+var path = require('path');
 const Fixtures = require('node-mongodb-fixtures');
 
 export class MongoDB implements IDatabase  {
@@ -10,7 +11,7 @@ export class MongoDB implements IDatabase  {
   dbName = "db"
   inMemory = false
   
-  fixtures = new Fixtures({mute: true});
+  fixtures = new Fixtures({mute: true, dir: `${path.join(__dirname, '..')}/fixtures`});
   mongod:any;
   destructor:any;
   DATABASE_URL = '';
@@ -20,7 +21,7 @@ export class MongoDB implements IDatabase  {
       throw new Error('The `fixtures` property must be defined');
     }
     Object.assign(this, config, options);
-    this.fixtures = new Fixtures({mute: true});
+    // this.fixtures = new Fixtures({mute: true});
   }
 
   static async create(config: IDatabase, options: any): Promise<MongoDB> {
