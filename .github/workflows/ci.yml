@@ -1,9 +1,12 @@
 name: Build
 
 on:
-  push:
+  # push:
+  #   branches:
+  #     - master
+  pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -21,6 +24,10 @@ jobs:
           # echo "::set-output name=changed_modules::$changed_modules"
           echo "CHANGED_MODULES=$changed_modules" >> $GITHUB_ENV
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
 
       - name: Build changed modules
         run: |
@@ -28,3 +35,9 @@ jobs:
           for module in $CHANGED_MODULES; do
             (cd $GITHUB_WORKSPACE/libs/$module && npm i && npm run build)
           done
+
+
+      - name: execute tests
+      
+        run: |
+          npm run test
