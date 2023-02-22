@@ -38,7 +38,7 @@ jobs:
           array=( interfaces mongodb jest_environment_testack testack )
           for module in "${array[@]}"
           do
-            (cd $module_name/libs/$module && npm i && npm run build)
+            (cd libs/$module && npm i && npm run build)
           done
 
           cd libs/create-testack/src/templates/javascript 
