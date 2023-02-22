@@ -40,4 +40,5 @@ jobs:
       - name: execute tests
       
         run: |
+          npm i
           npm run test
