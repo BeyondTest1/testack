@@ -35,6 +35,8 @@ jobs:
           for module in $CHANGED_MODULES; do
             (cd $GITHUB_WORKSPACE/libs/$module && npm i && npm run build)
           done
+          cd libs/create-testack/src/templates/javascript/tests
+          npm i
 
 
       - name: execute tests
