@@ -5,9 +5,7 @@
   "type": "commonjs",
   "main": "./index.js",
   "scripts": {
-    "prebuild": "rm -rf dist",
-    "lint": "eslint . --ext .js",
-    "build": "tsc"
+    "lint": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +28,7 @@
   "devDependencies": {
     "eslint": "^8.32.0",
     "testack-mongodb": "file:../mongodb",
-    "testackjs": "file:../../testack",
+    "testackjs": "file:../testack",
     "testack-interfaces": "file:../interfaces"
   },
   "include": [

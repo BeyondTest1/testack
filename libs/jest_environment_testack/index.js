@@ -45,6 +45,11 @@ class TestackEnvironment extends NodeEnvironment {
       }
     })
   }
+  getVmContext() {
+    return super.getVmContext();
+  }
+
+
 }
 
 module.exports = TestackEnvironment;
