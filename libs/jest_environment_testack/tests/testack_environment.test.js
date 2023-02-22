@@ -1,5 +1,5 @@
 const TestackEnvironment = require('../index.js');
-const Testack = require('../../../testack').default;
+const Testack = require('../../testack').default;
 
 describe('TestackEnvironment Unit Tests', function() {
   it('create and verify the instance', function() {

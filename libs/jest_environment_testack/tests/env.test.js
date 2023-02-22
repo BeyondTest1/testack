@@ -1,5 +1,5 @@
 /**
-* @jest-environment ./index.js
+* @jest-environment ./libs/jest_environment_testack/
 */
 
 describe('TestackEnvironment Unit Tests', function() {
