@@ -52,5 +52,4 @@ jobs:
         run: |
           (cd libs/create-testack/src/templates/javascript && npm run test)
           npm i
-          # npm run test:ci
           npm run test
