@@ -5,7 +5,8 @@
   "type": "commonjs",
   "main": "./index.js",
   "scripts": {
-    "lint": "eslint . --ext .js"
+    "lint": "eslint . --ext .js",
+    "build":""
   },
   "repository": {
     "type": "git",
