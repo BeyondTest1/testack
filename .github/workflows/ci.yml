@@ -35,7 +35,7 @@ jobs:
           # for module in $CHANGED_MODULES; do
           #   (cd $GITHUB_WORKSPACE/libs/$module && npm i && npm run build)
           # done
-          array=( interfaces mongodb testack )
+          array=( interfaces mongodb testack jest_environment_testack)
           for module in "${array[@]}"
           do
             (cd ./libs/$module && npm i && npm run build)
