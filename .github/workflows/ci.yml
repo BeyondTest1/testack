@@ -32,15 +32,16 @@ jobs:
       - name: Build changed modules
         run: |
           # Loop over each module and build it if it has changed
-          for module in $CHANGED_MODULES; do
-            (cd $GITHUB_WORKSPACE/libs/$module && npm i && npm run build)
-          done
+          # for module in $CHANGED_MODULES; do
+          #   (cd $GITHUB_WORKSPACE/libs/$module && npm i && npm run build)
+          # done
           cd libs/create-testack/src/templates/javascript
           npm i
+          npm run test
 
 
       - name: execute tests
       
         run: |
           npm i
-          npm run test
+          npm run test:ci

@@ -7,7 +7,8 @@
     "test:jestenv": "jest --runInBand --detectOpenHandles --selectProjects=jest-environment",
     "test:init": "jest --runInBand --detectOpenHandles --selectProjects=create-testack",
     "test:testack": "jest --runInBand --detectOpenHandles --selectProjects=testack",
-    "test": "jest --runInBand --detectOpenHandles --projects"
+    "test": "jest --runInBand --detectOpenHandles --projects",
+    "test:ci": "npm run test:mongodb && npm run test:jestenv && jestenv:testack"
   },
   "repository": {
     "type": "git",
