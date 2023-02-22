@@ -3,7 +3,6 @@ import {TestEnvConfig} from 'testack-interfaces';
 import Testack from 'testackjs';
 
 // export * from './mongodb/src/index';
-// const Testack = require('../../../testack').default;
 // export default class TestackEnvironment implements NodeEnvironment {
 
 class TestackEnvironment extends NodeEnvironment {

@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Determine changed files
+        run: |
+          changed_modules="$(git diff-tree --no-commit-id --name-only -r HEAD| grep -v -E '(\.test\.js$|jest\.config\.js$)' | awk -F/ '/^libs\//{print $2}' |uniq)"
+          
+          # Save the list of changed modules to an output variable
+          # echo "::set-output name=changed_modules::$changed_modules"
+          echo "CHANGED_MODULES=$changed_modules" >> $GITHUB_ENV
+
+
+      - name: Build changed modules
+        run: |
+          # Loop over each module and build it if it has changed
+          for module in $CHANGED_MODULES; do
+            (cd $GITHUB_WORKSPACE/libs/$module && npm i && npm run build)
+          done

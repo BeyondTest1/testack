@@ -22,7 +22,7 @@
     "rimraf": "^4.1.1",
     "ts-node": "^10.1.0",
     "typescript": "^4.9.4",
-    "testack-mongodb": "file:../libs/mongodb",
-    "testack-interfaces": "file:../libs/interfaces"
+    "testack-mongodb": "file:../mongodb",
+    "testack-interfaces": "file:../interfaces"
   }
 }
