@@ -7,6 +7,6 @@
     },
     "dependencies": {
         "jest": "^29.3.1",
-        "testack2": "^1.0.0"
+        "testackjs": "^0.0.1"
     }
 }
