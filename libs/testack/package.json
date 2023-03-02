@@ -1,14 +1,14 @@
 {
   "name": "testackjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "./dist",
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc",
+    "pub": "npm version patch --force && npm publish",
     "lint": "eslint . --ext .ts",
     "watch": "tsc -b ./tsconfig.packages.json ./tsconfig.json --watch"
-
   },
   "author": "Guy Eliyahu",
   "license": "ISC",

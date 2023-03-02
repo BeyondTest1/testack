@@ -50,10 +50,10 @@ class TestackEnvironment extends NodeEnvironment {
     await this.global.testack.init()
   }
 
-  // async teardown() {
-  //   this.global.testack.destroy();
-  //   await super.teardown();
-  // }
+  async teardown() {
+    this.global.testack.destroy();
+    await super.teardown();
+  }
 
   getVmContext() {
     return super.getVmContext();

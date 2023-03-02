@@ -37,18 +37,6 @@ describe('TestackEnvironment Unit Tests', function() {
         provider: "MongoDB",
         user: ""
       });
-
-    // expect(instance.global.testack.providers.mongodb).toEqual(
-    //   expect.objectContaining({
-    //     ...mongodb_params, 
-    //     host: "localhost",
-    //     provider: "MongoDB",
-    //     password: "password",
-    //     port: 27017,
-    //     provider: "MongoDB",
-    //     user: ""
-    //   })
-    // );
   });
 
 
@@ -77,5 +65,40 @@ describe('TestackEnvironment Unit Tests', function() {
         provider: "MongoDB",
       })
   });
+
+
+
+  it('should close the providers connections for inMemory mongoDB', async function() {
+    let mongodb_params = {
+      provider: "MongoDB",
+      username:"username",
+      password: "password",
+      inMemory: true
+    }
+    
+    const instance = new TestackEnvironment({
+      projectConfig:{
+        testEnvironmentOptions: {
+          providers: [ mongodb_params ]
+        }
+      },
+    });
+    await instance.global.testack.init()
+    expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
+    instance.global.testack.destroy()
+
+    // expect(instance.global.testack.providers.mongodb).toEqual(
+    //   expect.objectContaining({
+    //     ...mongodb_params, 
+    //     host: "localhost",
+    //     provider: "MongoDB",
+    //     password: "password",
+    //     port: 27017,
+    //     provider: "MongoDB",
+    //     user: ""
+    //   })
+    // );
+  });
+
 
 });

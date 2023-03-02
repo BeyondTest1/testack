@@ -38,4 +38,11 @@ export default class Testack {
         }
       }
     }
+
+    public async destroy() {
+      for (const provider in this.providers) {
+        this.providers[provider].destroy()
+      }
+    }
+
   }

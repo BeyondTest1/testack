@@ -78,6 +78,17 @@ var Testack = /** @class */ (function () {
             });
         });
     };
+    Testack.prototype.destroy = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var provider;
+            return __generator(this, function (_a) {
+                for (provider in this.providers) {
+                    this.providers[provider].destroy();
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
     return Testack;
 }());
 exports["default"] = Testack;

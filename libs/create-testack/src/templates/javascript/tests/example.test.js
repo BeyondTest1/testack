@@ -33,6 +33,8 @@ describe('using testack in a jest environment', function() {
 
   afterAll(async () => {
     console.log("after")
+    console.log(this.global.testack.providers.mongodb.destroy())
+    await this.global.testack.providers.mongodb.destroy()
     // await db.disconnect()
     // await mongoose.connection.close()
     // await instance.destroy();  
