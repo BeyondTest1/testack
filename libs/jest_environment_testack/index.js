@@ -45,11 +45,19 @@ class TestackEnvironment extends NodeEnvironment {
       }
     })
   }
+  async setup() {
+    await super.setup();
+    await this.global.testack.init()
+  }
+
+  // async teardown() {
+  //   this.global.testack.destroy();
+  //   await super.teardown();
+  // }
+
   getVmContext() {
     return super.getVmContext();
   }
-
-
 }
 
 module.exports = TestackEnvironment;

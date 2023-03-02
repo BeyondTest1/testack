@@ -20,7 +20,7 @@ module.exports = {
     },
     {    
       displayName: 'testack',
-      testMatch: ['<rootiDir>/libs/testack/tests/*.test.js'],
+      testMatch: ['<rootDir>/libs/testack/tests/*.test.js'],
     },
     {
 

@@ -1,13 +1,16 @@
 {
   "references": [
       {
-        "path": "../libs/mongodb", "dependOn": "../testack"
+        "path": "../mongodb", "dependOn": "../testack"
       },
       {
-        "path": "../libs/interfaces", "dependOn": "../testack"
+        "path": "../interfaces", "dependOn": "../testack"
       },
       {
-        "path": "../libs/create_testack"
+        "path": "../create-testack"
+      },
+      {
+        "path": "../testack"
       }
   ]
 }

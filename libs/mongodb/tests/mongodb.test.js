@@ -13,7 +13,8 @@ describe('MongoDB Unit Tests', function() {
       provider: "MongoDB",
       username:"username",
       password: "password",
-      inMemory:true
+      inMemory:true,
+      fixtures_path: "./libs/mongodb/fixtures/"
     }
   });
 
@@ -31,7 +32,7 @@ describe('MongoDB Unit Tests', function() {
     await instance.destroy();
   });
 
-  it('should reset the database',  async function() {
+  it('should reset the database1',  async function() {
     instance = await new MongoDB.create(mongodb_params);
     mongoose.connect(`${instance.DATABASE_URL}`,{useNewUrlParser: true, useUnifiedTopology: true});
     
@@ -50,7 +51,8 @@ describe('MongoDB Unit Tests', function() {
 
   it('should seed the database',  async function() {
     instance = await new MongoDB.create(mongodb_params);
-    mongoose.connect(`${instance.DATABASE_URL}`,{useNewUrlParser: true, useUnifiedTopology: true});    
+
+    mongoose.connect(`${instance.DATABASE_URL}`,{useNewUrlParser: true, useUnifiedTopology: true});
     
     await instance.seed();
     await expect(Dog.count()).resolves.toBe(3);

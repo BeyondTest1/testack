@@ -1,12 +1,13 @@
 {
   "name": "jest-environment-testack",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "testack.js environment for Jest",
   "type": "commonjs",
   "main": "./index.js",
   "scripts": {
     "lint": "eslint . --ext .js",
-    "build":""
+    "build": "",
+    "pub": "npm version patch --force && npm publish"
   },
   "repository": {
     "type": "git",

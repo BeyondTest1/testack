@@ -5,9 +5,7 @@
   "main": "./dist",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "clean": "rimraf dist esm",
-    "prebuild": "npm run clean",
-    "build": "tsc --project . && tsc --build",
+    "build": "tsc",
     "lint": "eslint . --ext .ts",
     "watch": "tsc -b ./tsconfig.packages.json ./tsconfig.json --watch"
 
@@ -22,7 +20,7 @@
     "rimraf": "^4.1.1",
     "ts-node": "^10.1.0",
     "typescript": "^4.9.4",
-    "testack-mongodb": "file:../mongodb",
-    "testack-interfaces": "file:../interfaces"
+    "testack-interfaces": "file:../interfaces",
+    "testack-mongodb": "file:../mongodb"
   }
 }

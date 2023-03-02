@@ -5,6 +5,7 @@
   "compilerOptions": {
     "lib": ["es2022"],
     "module": "commonjs",
+    "composite": true,
     "target": "es2022",
 
     "strict": true,
