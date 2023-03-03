@@ -55,7 +55,7 @@ var Testack = /** @class */ (function () {
     }
     Testack.prototype.init = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _i, _a, provider, instance;
+            var _i, _a, provider, instance, provider_name;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -68,7 +68,8 @@ var Testack = /** @class */ (function () {
                         return [4 /*yield*/, widgets[provider["provider"]].create(provider)];
                     case 2:
                         instance = _b.sent();
-                        this.providers[provider["provider"].toLowerCase()] = instance;
+                        provider_name = provider["provider"].toLowerCase();
+                        this.providers[provider_name] = instance;
                         _b.label = 3;
                     case 3:
                         _i++;
@@ -80,12 +81,24 @@ var Testack = /** @class */ (function () {
     };
     Testack.prototype.destroy = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var provider;
-            return __generator(this, function (_a) {
-                for (provider in this.providers) {
-                    this.providers[provider].destroy();
+            var _i, _a, provider;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _i = 0, _a = Object.values(this.providers);
+                        _b.label = 1;
+                    case 1:
+                        if (!(_i < _a.length)) return [3 /*break*/, 4];
+                        provider = _a[_i];
+                        return [4 /*yield*/, provider.destroy()];
+                    case 2:
+                        _b.sent();
+                        _b.label = 3;
+                    case 3:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/];
                 }
-                return [2 /*return*/];
             });
         });
     };

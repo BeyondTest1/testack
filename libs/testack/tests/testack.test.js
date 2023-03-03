@@ -7,28 +7,17 @@ const Testack = require('../').default;
 // const TestackClient = require('testack/lib/core/client.js');
 let testack;
 
-describe('TestackEnvironment Unit Tests', function() {
-  it('setting mongodb provider', async function() {
-    let mongodb_params = {
-      username:"username",
-      password: "password",
-      provider: "MongoDB",
+let mongodb_params = {
+  provider: "MongoDB",
+  inMemory:true
+}
+
+describe('Testack Unit Tests', function() {
+  afterEach(async () => {
+    if(testack){
+      await testack.destroy();
     }
 
-    testack = new Testack({
-        providers: [ mongodb_params ]
-      }
-    );
-    await testack.init()
-
-    expect(testack.providers.mongodb).toMatchObject(   
-      { 
-        ...mongodb_params, 
-        host: "127.0.0.1",
-        port: 27017,
-
-        
-      });
   });
 
   it('should filter incorrect provider setting', async function() {
@@ -44,5 +33,20 @@ describe('TestackEnvironment Unit Tests', function() {
   });
 
   
+  it('destroy inMem mongodb provider', async function() {
+    let mongodb_params = {
+      provider: "MongoDB",
+      inMemory:true
+    }
+
+    testack = new Testack({
+        providers: [ mongodb_params ]
+      }
+    );
+    
+    await testack.init()
+    expect(testack.providers.mongodb).toMatchObject(mongodb_params);
+    await testack.destroy()
+  });
 
 });

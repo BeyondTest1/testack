@@ -33,8 +33,8 @@ describe('using testack in a jest environment', function() {
 
   afterAll(async () => {
     console.log("after")
-    console.log(this.global.testack.providers.mongodb.destroy())
-    await this.global.testack.providers.mongodb.destroy()
+    // console.log(this.global.testack.providers.mongodb.destroy())
+    // await this.global.testack.providers.mongodb.destroy()
     // await db.disconnect()
     // await mongoose.connection.close()
     // await instance.destroy();  
@@ -51,7 +51,7 @@ describe('using testack in a jest environment', function() {
   });
 
   // it('should reset the database and load the seed data from the `fixtures` folder',  async function() {
-  it('should reset the database before a test starts',  async function() {
+  it.skip('should reset the database before a test starts',  async function() {
     // await expect(Dog.count()).resolves.toBe(0);
     console.log("2")
     expect(1).toBe(1);

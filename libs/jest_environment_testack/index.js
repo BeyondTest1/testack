@@ -51,7 +51,7 @@ class TestackEnvironment extends NodeEnvironment {
   }
 
   async teardown() {
-    this.global.testack.destroy();
+    await this.global.testack.destroy();
     await super.teardown();
   }
 

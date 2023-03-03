@@ -10,9 +10,9 @@
         "mongodb-memory-server": "^8.11.4",
         "mongoose": "^6.9.1",
         "testack-mongodb": "^1.0.18",
-        "testackjs": "^0.0.2"
+        "testackjs": "^0.0.4"
     },
     "devDependencies": {
-        "jest-environment-testack": "^0.0.15"
+        "jest-environment-testack": "^0.0.16"
     }
 }

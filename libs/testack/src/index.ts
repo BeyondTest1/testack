@@ -34,15 +34,15 @@ export default class Testack {
       for (const provider of this.input_providers) {
         if (provider["provider"] in widgets) {
           const instance = await widgets[provider["provider"]].create(provider);
-          this.providers[provider["provider"].toLowerCase()] = instance;
+          const provider_name =provider["provider"].toLowerCase()
+          this.providers[provider_name] = instance;
         }
       }
     }
 
     public async destroy() {
-      for (const provider in this.providers) {
-        this.providers[provider].destroy()
+      for (const provider of Object.values(this.providers)) {
+        await provider.destroy()
       }
     }
-
   }

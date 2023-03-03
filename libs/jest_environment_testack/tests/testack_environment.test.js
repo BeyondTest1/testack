@@ -85,7 +85,7 @@ describe('TestackEnvironment Unit Tests', function() {
     });
     await instance.global.testack.init()
     expect(Object.keys(instance.global.testack.providers)).toHaveLength(1);
-    instance.global.testack.destroy()
+    await instance.global.testack.destroy()
 
     // expect(instance.global.testack.providers.mongodb).toEqual(
     //   expect.objectContaining({
