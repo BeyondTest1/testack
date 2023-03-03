@@ -30,13 +30,17 @@ class TestackEnvironment extends NodeEnvironment {
 
   async handleTestEvent(event, state) {    
   if( !event?.name) return;
-    this.actions[event.name]?.map((action) => {
+    this.actions[event.name]?.map(async (action) => {
       switch(action.method) { 
-        case "reset": {      
-            this.global?.testack?.providers[action.provider.toLowerCase()]?.reset();
+        case "reset": {
+            await this.global?.testack?.providers[action.provider.toLowerCase()]?.reset();
             break; 
         } 
-        default: { 
+        case "seed": {
+          await this.global?.testack?.providers[action.provider.toLowerCase()]?.seed();
+          break; 
+        } 
+      default: { 
           console.warn(
           `action with method '${action.method}' not found in  '${action.provider}' class. please verify your 'testEnvironmentOptions' configuration section!`
           );
