@@ -1,7 +1,7 @@
 /**
-* @jest-environment ./libs/jest_environment_testack/
-* @jest-environment-options {"providers":[ {"provider": "MongoDB", "inMemory":true, "fixtures_path": "./libs/create-testack/src/templates/javascript/fixtures/"} ],"actions": [{"event": "test_start","provider": "MongoDB","method": "reset"}]}
-*/
+ * @jest-environment jest-environment-testack
+ * @jest-environment-options {"providers":[ {"provider": "MongoDB", "inMemory":true, "fixtures_path": "./fixtures"} ],"actions": [{"event": "test_start","provider": "MongoDB","method": "reset"}]}
+ */
 
 const {MongoDB}  = require('testack-mongodb');
 var mongoose = require('mongoose');

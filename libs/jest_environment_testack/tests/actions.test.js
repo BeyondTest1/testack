@@ -68,7 +68,7 @@ describe('TestackEnvironment actions', function() {
       resetFunction = jest.spyOn(testackEnv.global.testack.providers.mongodb, 'reset');
       await testackEnv.handleTestEvent({name: "setup"});
       expect(resetFunction).toHaveBeenCalledTimes(0);
-      expect(console.warn).toBeCalledTimes(1)
+      expect(console.warn).toBeCalledTimes(2)
       expect(console.warn).toHaveBeenLastCalledWith(`action with method 'incorrect_method' not found in  'MongoDB' class. please verify your 'testEnvironmentOptions' configuration section!`);
     });
 });

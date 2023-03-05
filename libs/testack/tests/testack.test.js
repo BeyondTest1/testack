@@ -17,8 +17,8 @@ describe('Testack Unit Tests', function() {
     if(testack){
       await testack.destroy();
     }
-
   });
+
 
   it('should filter incorrect provider setting', async function() {
     testack = new Testack({

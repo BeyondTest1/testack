@@ -1,14 +1,13 @@
 /**
-* @jest-environment ./libs/jest_environment_testack/
-* @jest-environment-options {"providers":[ {"provider": "MongoDB", "inMemory":true, "fixtures_path": "./libs/create-testack/src/templates/javascript/fixtures/"} ],"actions": [{"event": "test_start","provider": "MongoDB","method": "reset"}]}
-*/
+ * @jest-environment jest-environment-testack
+ * @jest-environment-options {"providers":[ {"provider": "MongoDB", "inMemory":true, "fixtures_path": "./fixtures"} ],"actions": [{"event": "test_start","provider": "MongoDB","method": "seed"}]}
+ */
 
 const {MongoDB}  = require('testack-mongodb');
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 
 var instance, Dog, db;
-
 
 describe('environment with inMemory mongodb', function() {
     beforeAll(async () => {
@@ -21,14 +20,14 @@ describe('environment with inMemory mongodb', function() {
       })
         
     it('should insert sample data into the database', async function() {
-        await expect(Dog.count()).resolves.toBe(0);
+        await expect(Dog.count()).resolves.toBe(3);
         var dog1 = new Dog({ name: 'Snoop Doggy Dog'});
         await dog1.save();
-        await expect(Dog.count()).resolves.toBe(1);
+        await expect(Dog.count()).resolves.toBe(4);
       });
     
       it('should reset the database before a test starts',  async function() {
-        await expect(Dog.count()).resolves.toBe(0);
+        await expect(Dog.count()).resolves.toBe(3);
       });    
 });
   

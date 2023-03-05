@@ -47,10 +47,10 @@ export class MongoDB implements IDatabase  {
     mongoDB.DATABASE_URL = `mongodb://${mongoDB.host}:${mongoDB.port}/${mongoDB.dbName}`;
 
     try {
-      await mongoDB.fixtures.connect(mongoDB.DATABASE_URL, {useUnifiedTopology: true});
+      await mongoDB.fixtures.connect(mongoDB.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
     }
     catch{
-      console.log("testack-mongodb: fixtures can't connect to database")
+      console.warn("testack-mongodb: fixtures can't connect to database")
     }
 
     return mongoDB;
@@ -62,21 +62,22 @@ export class MongoDB implements IDatabase  {
           await this.fixtures.disconnect();
       }
       catch{
-        console.log("testack-mongodb: failed to disconnect from fixtures")
+        console.warn("testack-mongodb: failed to disconnect from fixtures")
       }
       try{
         await this.mongod?.stop();
       }
       catch{
-        console.log("testack-mongodb: failed to disconnect from mongod")
+        console.warn("testack-mongodb: failed to disconnect from mongod")
       }
       
       
   }
 
   async reset(): Promise<Boolean> {
-    if(this.fixtures)
+    if(this.fixtures){
       await this.fixtures.unload();
+    }
 
     return true;
   }

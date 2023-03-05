@@ -100,5 +100,8 @@ describe('TestackEnvironment Unit Tests', function() {
     // );
   });
 
+  beforeAll(async () => {
+    global.console.warn = jest.fn();
+  })
 
 });
