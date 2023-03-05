@@ -41,15 +41,14 @@ jobs:
             (cd ./libs/$module && npm i && npm run build)
           done
 
-          (cd ./libs/create-testack/src/templates/javascript && npm i)
-
-      # - name: execute demo test
-      #   run: |
-      #     cd libs/create-testack/src/templates/javascript 
-      #     npm run test
-
-      - name: execute modules tests
-        run: |
-          (cd libs/create-testack/src/templates/javascript && npm run test)
+      - name: execute unittests tests
+        run: 
           npm i
           npm run test
+
+      - name: execute example tests
+        run: |
+          cd ./libs/create-testack/src/templates/javascript
+          npm i
+          npm run test
+
