@@ -13,6 +13,6 @@
         "testackjs": "^0.0.6"
     },
     "devDependencies": {
-        "jest-environment-testack": "^0.0.18"
+        "jest-environment-testack": "file:../../../../jest_environment_testack"
     }
 }
