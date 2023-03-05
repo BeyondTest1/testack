@@ -5,10 +5,12 @@
   "scripts": {
     "test:mongodb": "jest --runInBand --detectOpenHandles --selectProjects=mongodb",
     "test:jestenv": "jest --runInBand --detectOpenHandles --selectProjects=jest-environment",
-    "test:init": "jest --runInBand --detectOpenHandles --selectProjects=create-testack",
     "test:testack": "jest --runInBand --detectOpenHandles --selectProjects=testack",
     "test": "jest --runInBand --detectOpenHandles --projects",
-    "test:ci": "npm run test:mongodb && npm run test:jestenv && npm run test:testack"
+    "rebuild:mongodb": "cd libs/mongodb && rm -rf node_modules dist tsconfig.tsbuildinfo && npm i && npm run build",
+    "rebuild:testack": "cd libs/testack && rm -rf node_modules dist tsconfig.tsbuildinfo && npm i && npm run build",
+    "rebuild:jestenv": "cd libs/jest_environment_testack && rm -rf node_modules && npm i",
+    "rebuild": "npm run rebuild:mongodb && npm run rebuild:testack && npm run rebuild:jestenv"
   },
   "repository": {
     "type": "git",

@@ -30,26 +30,29 @@ class TestackEnvironment extends NodeEnvironment {
 
   async handleTestEvent(event, state) {    
   if( !event?.name) return;
-    this.actions[event.name]?.map((action) => {
-      switch(action.method) { 
-        case "reset": {      
-            this.global?.testack?.providers[action.provider.toLowerCase()]?.reset();
-            break; 
-        } 
-        default: { 
-          console.warn(
-          `action with method '${action.method}' not found in  '${action.provider}' class. please verify your 'testEnvironmentOptions' configuration section!`
-          );
-          break; 
-        } 
+    for (const action of this.actions[event.name] || []) {
+      let method = this.global?.testack?.providers[action.provider.toLowerCase()][action.method] || undefined
+      if(method)
+        await this.global?.testack?.providers[action.provider.toLowerCase()][action.method]();
+      else {
+        console.warn(`action with method '${action.method}' not found in  '${action.provider}' class. please verify your 'testEnvironmentOptions' configuration section!`)
       }
-    })
+    }
   }
+
+  async setup() {
+    await super.setup();
+    await this.global.testack.init()
+  }
+
+  async teardown() {
+    await this.global.testack.destroy();
+    await super.teardown();
+  }
+
   getVmContext() {
     return super.getVmContext();
   }
-
-
 }
 
 module.exports = TestackEnvironment;

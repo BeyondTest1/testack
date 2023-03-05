@@ -1,42 +1,52 @@
+const { MongoDB } = require('../../mongodb/dist');
+// const { MongoDB } = require('testack-mongodb');
+
+
 const Testack = require('../').default;
 // const * as Testack = require('../dist/index.js').default;
 // const TestackClient = require('testack/lib/core/client.js');
+let testack;
 
-describe('TestackEnvironment Unit Tests', function() {
-  it('setting mongodb provider', function() {
+let mongodb_params = {
+  provider: "MongoDB",
+  inMemory:true
+}
+
+describe('Testack Unit Tests', function() {
+  afterEach(async () => {
+    if(testack){
+      await testack.destroy();
+    }
+  });
+
+
+  it('should filter incorrect provider setting', async function() {
+    testack = new Testack({
+        providers: [ {
+                provider: "IncorrectProvider",
+            }
+        ]
+    });
+    await testack.init()
+    expect(Object.keys(testack.providers)).toHaveLength(0);
+
+  });
+
+  
+  it('destroy inMem mongodb provider', async function() {
     let mongodb_params = {
       provider: "MongoDB",
-      username:"username",
-      password: "password"
+      inMemory:true
     }
 
-    const testack = new Testack({
+    testack = new Testack({
         providers: [ mongodb_params ]
       }
     );
-    expect(Object.keys(testack.providers)).toHaveLength(1);
-    expect(testack.providers.mongodb).toEqual(
-      expect.objectContaining(
-        {
-          ...mongodb_params, 
-          host: "localhost",
-          provider: "MongoDB",
-          password: "password",
-          port: 27017,
-          provider: "MongoDB",
-          user: ""
-        }
-      )
-    );
+    
+    await testack.init()
+    expect(testack.providers.mongodb).toMatchObject(mongodb_params);
+    await testack.destroy()
   });
 
-  it('should filter incorrect provider setting', async function() {
-    const testack = new Testack({
-        providers: [ {
-                provider: "IncorrectProvider",
-            } 
-        ]
-    });
-    expect(Object.keys(testack.providers)).toHaveLength(0);
-  });
 });

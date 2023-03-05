@@ -5,6 +5,8 @@ export interface IDatabase {
   user: string;
   password: string;
   inMemory: boolean;
+  fixtures_path: string;
+  dbName: string;
   reset: () => void;
   seed: () => void;
 }

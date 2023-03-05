@@ -76,7 +76,6 @@ inquirer.prompt(QUESTIONS).then(async (answers: any) => {
   // fs.outputJson(filename, {name: 'JP'})
   // .then(() => fs.readJson(filename))
   // .then(async(data:any) => {
-  // console.log(data.name) 
   answers = Object.assign({}, answers, yargs.argv);
 
   const projectChoice = answers['template'];

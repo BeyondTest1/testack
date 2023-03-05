@@ -1,60 +1,91 @@
 import { IDatabase } from 'testack-interfaces';
-var path = require('path');
+var fs = require('fs');
 const Fixtures = require('node-mongodb-fixtures');
 
 export class MongoDB implements IDatabase  {
   provider = "MongoDB";
-  host = "localhost";
+  host = "127.0.0.1";
   port = 27017;
   user = "";
   password = "";
   dbName = "db"
   inMemory = false
-  
-  fixtures = new Fixtures({mute: true, dir: `${path.join(__dirname, '..')}/fixtures`});
+  fixtures_path = "fixtures"
+  fixtures:any;
   mongod:any;
   destructor:any;
   DATABASE_URL = '';
 
   private constructor(config: IDatabase, options:any) {
-    if (!this.fixtures) {
-      throw new Error('The `fixtures` property must be defined');
+    this.fixtures_path = config?.fixtures_path || this.fixtures_path;
+
+    if (fs.existsSync(this.fixtures_path)){
+      this.fixtures = new Fixtures({mute: true, dir: this.fixtures_path });//`${path.join(__dirname, '..')}/fixtures`;
+
+      if (!this.fixtures) {
+        throw new Error('The `fixtures` property must be defined');
+      }
     }
     Object.assign(this, config, options);
-    // this.fixtures = new Fixtures({mute: true});
   }
 
   static async create(config: IDatabase, options: any): Promise<MongoDB> {
     const mongoDB = new MongoDB(config, options);
     const { MongoMemoryServer } = require('mongodb-memory-server')
+    
     if(mongoDB.inMemory){
-      mongoDB.mongod = await MongoMemoryServer.create();
-      mongoDB.host = mongoDB.mongod._instanceInfo.ip;
+      mongoDB.mongod = await MongoMemoryServer.create({
+        instance: {
+          dbName: mongoDB.dbName,
+          // port: mongoDB.port,
+          ip: mongoDB.host 
+        }
+      });
       mongoDB.port = mongoDB.mongod._instanceInfo.port;
-
     }
+
     mongoDB.DATABASE_URL = `mongodb://${mongoDB.host}:${mongoDB.port}/${mongoDB.dbName}`;
+
+    try {
+      await mongoDB.fixtures.connect(mongoDB.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+    }
+    catch{
+      console.warn("testack-mongodb: fixtures can't connect to database")
+    }
+
     return mongoDB;
   }
 
   async destroy() {
-      await this.mongod?.stop();
+      try{
+        if(this.fixtures)
+          await this.fixtures.disconnect();
+      }
+      catch{
+        console.warn("testack-mongodb: failed to disconnect from fixtures")
+      }
+      try{
+        await this.mongod?.stop();
+      }
+      catch{
+        console.warn("testack-mongodb: failed to disconnect from mongod")
+      }
+      
+      
   }
 
-
   async reset(): Promise<Boolean> {
-    await this.fixtures.connect(this.DATABASE_URL, {useUnifiedTopology: true});
-    await this.fixtures.unload();
-    // await this.fixtures.load();
-    await this.fixtures.disconnect();
+    if(this.fixtures){
+      await this.fixtures.unload();
+    }
 
     return true;
   }
   async seed(): Promise<Boolean> {
-    await this.fixtures.connect(this.DATABASE_URL, {useUnifiedTopology: true});
-    await this.fixtures.unload();
-    await this.fixtures.load();
-    await this.fixtures.disconnect();
+    if(this.fixtures){
+      await this.fixtures.unload();
+      await this.fixtures.load();
+    }
 
     return true;
   }

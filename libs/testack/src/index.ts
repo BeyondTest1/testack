@@ -22,16 +22,27 @@ type Providers = {
 
 export default class Testack {
   providers: Providers = {};
+  input_providers:any;
   constructor({ 
           providers = [], 
           configPath = "~/.example.config.js"
       }: Config) {
-        providers.forEach( (provider:any) => {
-          if (provider["provider"] in widgets) {
-            const instance = Object.create(widgets[provider["provider"]].prototype);
-            instance.constructor(provider);
-            this.providers[provider["provider"].toLowerCase()] = instance
-          }
-        });      
+        this.input_providers= providers;
+    }
+
+    public async init() {
+      for (const provider of this.input_providers) {
+        if (provider["provider"] in widgets) {
+          const instance = await widgets[provider["provider"]].create(provider);
+          const provider_name =provider["provider"].toLowerCase()
+          this.providers[provider_name] = instance;
+        }
+      }
+    }
+
+    public async destroy() {
+      for (const provider of Object.values(this.providers)) {
+        await provider.destroy()
+      }
     }
   }

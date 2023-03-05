@@ -5,6 +5,7 @@
   "compilerOptions": {
     "lib": ["es2022"],
     "module": "commonjs",
+    "composite": true,
     "target": "es2022",
 
     "strict": true,
@@ -12,7 +13,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "outDir": "lib",
+    "outDir": "dist",
     "noImplicitAny": true
 
   },
