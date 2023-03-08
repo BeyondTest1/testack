@@ -3,19 +3,17 @@
   "display": "Node 18",
 
   "compilerOptions": {
-    "lib": ["es2022"],
     "module": "commonjs",
     "composite": true,
     "target": "es2022",
-
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "outDir": "dist",
+    "resolveJsonModule": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "noImplicitAny": true
-
   },
 
   "include": ["src/**/*"],

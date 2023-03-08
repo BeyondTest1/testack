@@ -1,6 +1,6 @@
 {
   "name": "create-testack",
-  "version": "1.0.32",
+  "version": "1.0.38",
   "description": "A single-command tool to setup Testack.js",
   "main": "dist/index.js",
   "module": "esm/index.js",
@@ -24,7 +24,7 @@
     "pub": "npm version patch --force && npm publish",
     "test": "jest",
     "create-testack": "npm run build && node dist/index.js",
-    "test:publish": "cd $(mktemp -d -t ci-XXXXXXXXXX) && npm init testack@1.0.30 --  --template=javascript"
+    "test:publish": "cd $(mktemp -d -t ci-XXXXXXXXXX) && npm init testack@latest -- --name=stam --template=javascript && cd stam && npm run test"
   },
   "repository": {
     "type": "git",
@@ -42,7 +42,6 @@
     "fs-extra": "^11.1.0",
     "inquirer": "^8.2.4",
     "lmify": "^0.3.0",
-    "shelljs": "^0.8.5",
     "yargs": "^17.6.2"
   },
   "devDependencies": {
@@ -52,7 +51,6 @@
     "@types/inquirer": "^8.2.1",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.18",
-    "@types/shelljs": "^0.8.11",
     "@types/yargs": "^17.0.19",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
