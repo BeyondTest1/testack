@@ -1,15 +1,5 @@
 # jest-environment-testack
 
-<p align=center>
-  <img alt="Testack.js Schematic Logo" src=".github/assets/testack-logo.svg" width=200 />
-  <img alt="Cucumber.js Schematic Logo" src=".github/assets/jest-logo.png" width=200 />
-</p>
-
-[![Build Status][build-badge]][build]
-[![version][version-badge]][package]
-[![Discord][discord-badge]][discord]
-[![MIT License][license-badge]][license]
-
 **[Testack](https://testackjs.org)** environment for Jest. Testack.js is an integrated test framework for performing automated end-to-end testing on web applications and websites, across all major browsers.
 
 ```
@@ -57,6 +47,7 @@ you can also use the `jest-environment-testack` for only a specific suite case:
   it('use jest-environment-testack in this test file', function() {
     expect(global.testack).toBeDefined();
   });
+
 ```
 
 ## jest test suite life cycle
@@ -79,25 +70,7 @@ teardown
 
 ### `global.testack`
 
-The Jest environment used the Testack [programmatic API](https://v2.testackjs.org/api/programmatic/) to create the Testack instance and export the browser API. 
-
 Available properties/methods:
-- `.element(<locator>)` - use the Testack [.element() API](https://v2.testackjs.org/api/element/) to locate elements in the page;
-- `.updateCapabilities({ capabilities })` - used when `autoStartSession` is off in order to update the capabilities at run-time;
-- `.launchBrowser()` - used when `autoStartSession` is off in order to start the session and open the browser;
-- `.settings` - the Testack settings object;
-- `.testack_client` - the Testack (internal) instance.
-
-
-## License
-MIT
-
-[build-badge]: https://github.com/testackjs/jest-environment-testack/actions/workflows/node.js.yml/badge.svg?branch=main
-[build]: https://github.com/testackjs/jest-environment-testack/actions/workflows/node.js.yml
-[version-badge]: https://img.shields.io/npm/v/jest-environment-testack.svg?style=flat-square
-[package]: https://www.npmjs.com/package/jest-environment-testack
-[license-badge]: https://img.shields.io/npm/l/jest-environment-testack.svg?style=flat-square
-[license]: https://github.com/testackjs/jest-environment-testack/blob/main/LICENSE
-[discord-badge]: https://img.shields.io/discord/618399631038218240.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff&style=flat-square
-[discord]: https://discord.gg/SN8Da2X
-
+- `.testack` - the Testack instance.
+- `.providers.<provider>` - use the Testack [.provider API](https://v2.testackjs.org/api/providers/) to use the provider abilities;
+- `.actions.<action>` - configure the provider's actions [.provider API](https://v2.testackjs.org/api/actions/);
