@@ -3,7 +3,7 @@
 to test the package:
 ```
 cd $(mktemp -d -t ci-XXXXXXXXXX)
-npm init testack
+npm init testack@latest
 ```
 
 to test locally:

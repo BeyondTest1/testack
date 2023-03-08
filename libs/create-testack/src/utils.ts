@@ -2,7 +2,6 @@
 import * as path from 'path'
 const fs = require('fs-extra')
 import * as template from './utils/template'
-import * as shell from 'shelljs'
 
 export function createProject(projectPath: string) {
   if (fs.existsSync(projectPath)) {
