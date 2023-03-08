@@ -1,7 +1,5 @@
 # Testack
-Testack is an integrated testing framework powered by Node.js. It provides a complete testing solution for microservices applications, servers, and APIs. With its flexible API, you can create a wide range of test scenarios and gain valuable insights into the quality of your code.
-
-Our ambitious goal is to create a microservices and API test framework that supports every tech stack, making it easy for developers to test their code regardless of the technologies they are using.
+Testack is an integrated testing framework powered by Node.js that provides a complete testing solution for microservices applications, servers, and APIs regardless of your tech stack. This makes it easy for developers to test their code no matter what technologies they are using.
 
 
 ## Features
