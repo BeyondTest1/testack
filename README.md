@@ -2,17 +2,6 @@
 Testack is an integrated testing framework powered by Node.js that provides a complete testing solution for microservices applications, servers, and APIs regardless of your tech stack. This makes it easy for developers to test their code no matter what technologies they are using.
 
 
-## Features
-Testack provides the following features:
-
-* End-to-end testing for microservices applications
-* Server & API testing
-* Built-in support for popular testing libraries like Jest
-* Built-in support for popular databases like MongoDB
-* Built-in support for popular broker messaging such as Kafka
-* Customizable reporters for displaying test results
-
-
 ## Installation
 For a new project, you can use the Testack wizard to configure everything for you. Simply run the following command:
 `npm init testack@latest`
@@ -50,7 +39,12 @@ Or, you can configure Testack within Jest by adding the following to your jest.c
 }
 
 ```
-In the above example, it is assumed that you have a MongoDB in your tech stack and that you want to reset your database before each test.
+
+Assuming you have MongoDB in your technology stack and want to reset the database before each test, the example provided in the previous section can be used to configure Testack within Jest. For more information on the Jest environment for Testack, please refer to the [Jest Envitonment For Testack](https://github.com/BeyondTest1/testack/tree/main/libs/jest_environment_testack) documentation.
+
+## Database and Message Broker Providers
+Testack currently supports [MongoDB](https://github.com/BeyondTest1/testack/tree/main/libs/mongodb). 
+Support for RabbitMQ, Apache Kafka, PostgreSQL, Redis, MySQL, and MS SQL Server is planned for the future.
 
 ## Upcoming features
 Auto-generated continuous integration pipelines (Jenkins, Github Actions)
