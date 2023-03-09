@@ -50,7 +50,7 @@ Or, you can configure Testack within Jest by adding the following to your jest.c
 }
 
 ```
-In the above example, it is assumed that you have a MongoDB in your tech stack and that you want to reset your database before each test. To make the example work, you will need to install the relevant packages that are relevant to your tech stack environment: `npm i --save-dev testack-mongodb jest-environment-testack` or you can use the npm init command that is shown above.
+In the above example, it is assumed that you have a MongoDB in your tech stack and that you want to reset your database before each test.
 
 ## Upcoming features
 Auto-generated continuous integration pipelines (Jenkins, Github Actions)
